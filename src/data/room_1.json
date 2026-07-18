@@ -1,0 +1,63 @@
+{
+  "room_id": "room_1_bao_cap",
+  "background": {
+    "url": "/assets/background1.png",
+    "z_index": 0
+  },
+  "interactive_objects": [
+    {
+      "id": "obj_sogao",
+      "image_url": "/assets/sogao.png",
+      "position": [
+        -0.54,
+        -0.9,
+        0.5
+      ],
+      "scale": [
+        0.95,
+        0.61,
+        1
+      ],
+      "content": {
+        "title": "Khủng hoảng Lương thực",
+        "desc": "Kinh tế đình đốn, lương thực, thực phẩm và hàng tiêu dùng khan hiếm gay gắt. Sổ gạo là phao cứu sinh duy nhất."
+      }
+    },
+    {
+      "id": "obj_bangdien",
+      "image_url": "/assets/dongho.png",
+      "position": [
+        1.16,
+        1.11,
+        0.5
+      ],
+      "scale": [
+        1.11,
+        0.53,
+        1
+      ],
+      "content": {
+        "title": "Lạm Phát 774%",
+        "desc": "Đỉnh điểm lạm phát lên đến 774% vào năm 1986. Tiền mất giá nghiêm trọng, sản xuất đình đốn."
+      }
+    },
+    {
+      "id": "obj_loa",
+      "image_url": "/assets/loa.png",
+      "position": [
+        3.92,
+        1.28,
+        0.5
+      ],
+      "scale": [
+        -1.41,
+        0.64,
+        1
+      ],
+      "content": {
+        "title": "Sức ép Cải tổ",
+        "desc": "Xã hội xuất hiện nhiều vi phạm pháp luật và tình trạng vượt biên. Thế giới có cách mạng KH-KT, Liên Xô và các nước XHCN bắt đầu cải tổ."
+      }
+    }
+  ]
+}
