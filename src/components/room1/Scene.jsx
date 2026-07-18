@@ -1,0 +1,154 @@
+import React, { useRef, useEffect, Suspense } from 'react';
+import { useThree, useFrame } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
+import { Vector3 } from 'three';
+import gsap from 'gsap';
+import Background from './Background';
+import InteractivePlane from './InteractivePlane';
+import Mascot from './Mascot';
+
+// Scene chính quản lý camera chuyển động
+function Scene({
+  roomData,
+  selectedObjectId,
+  setSelectedObjectId,
+  isEditMode,
+  transformMode,
+  onUpdateTransform,
+  showUI,
+  setShowUI,
+  mascotState,
+  chatOpen,
+  onMascotClick
+}) {
+  const { camera } = useThree();
+  const lookAtTarget = useRef(new Vector3(0, 0, 0));
+
+  // Camera luôn nhìn vào điểm lookAtTarget
+  useFrame(() => {
+    camera.lookAt(lookAtTarget.current);
+  });
+
+  // Xử lý chuyển động Camera bằng GSAP (Zoom 2.5D vào hiện vật hoặc Robot trợ lý)
+  useEffect(() => {
+    if (selectedObjectId && !isEditMode) {
+      const targetObj = roomData.interactive_objects.find(obj => obj.id === selectedObjectId);
+      if (targetObj) {
+        setShowUI(false);
+
+        const [x, y, z] = targetObj.position;
+
+        // Cấu hình khoảng cách Zoom và độ lệch Camera tùy chỉnh cho từng hiện vật
+        let zoomDist = 1.0;
+        let camOffsetX = 0.5;
+
+        if (targetObj.id === 'obj_sogao') {
+          zoomDist = 1.25;
+          camOffsetX = 0.65;
+        } else if (targetObj.id === 'obj_loa') {
+          zoomDist = 1.35;
+          camOffsetX = -0.6;
+        } else if (targetObj.id === 'obj_bangdien') {
+          zoomDist = 1.0;
+          camOffsetX = 0.4;
+        }
+
+        const targetCamPos = new Vector3(x + camOffsetX, y, z + zoomDist);
+        const targetLookAt = new Vector3(x + camOffsetX, y, z);
+
+        gsap.killTweensOf([camera.position, lookAtTarget.current]);
+
+        gsap.to(camera.position, {
+          x: targetCamPos.x,
+          y: targetCamPos.y,
+          z: targetCamPos.z,
+          duration: 1.2,
+          ease: 'power2.inOut',
+        });
+
+        gsap.to(lookAtTarget.current, {
+          x: targetLookAt.x,
+          y: targetLookAt.y,
+          z: targetLookAt.z,
+          duration: 1.2,
+          ease: 'power2.inOut',
+          onComplete: () => { setShowUI(true); }
+        });
+      }
+    } else if (chatOpen && !selectedObjectId && !isEditMode) {
+      // Zoom 2.5D vào chú Robot Mascot khi đang ở trạng thái Trò chuyện tự do
+      setShowUI(false);
+
+      const targetCamPos = new Vector3(2.2 + 0.22, -0.5, 0.6 + 0.97);
+      const targetLookAt = new Vector3(2.2 + 0.22, -0.5, 0.6);
+
+      gsap.killTweensOf([camera.position, lookAtTarget.current]);
+
+      gsap.to(camera.position, {
+        x: targetCamPos.x,
+        y: targetCamPos.y,
+        z: targetCamPos.z,
+        duration: 1.2,
+        ease: 'power2.inOut',
+      });
+
+      gsap.to(lookAtTarget.current, {
+        x: targetLookAt.x,
+        y: targetLookAt.y,
+        z: targetLookAt.z,
+        duration: 1.2,
+        ease: 'power2.inOut',
+        onComplete: () => { setShowUI(true); }
+      });
+    } else {
+      // Khi lùi về toàn cảnh
+      setShowUI(false);
+
+      gsap.killTweensOf([camera.position, lookAtTarget.current]);
+
+      gsap.to(camera.position, { x: 0, y: 0, z: 5, duration: 1.2, ease: 'power2.inOut' });
+      gsap.to(lookAtTarget.current, { x: 0, y: 0, z: 0, duration: 1.2, ease: 'power2.inOut' });
+    }
+  }, [selectedObjectId, chatOpen, roomData, isEditMode, camera, setShowUI]);
+
+  return (
+    <group>
+      <Background
+        url={roomData.background.url}
+        selectedObjectId={selectedObjectId}
+        isEditMode={isEditMode}
+      />
+
+      {roomData.interactive_objects.map((obj) => (
+        <InteractivePlane
+          key={obj.id}
+          id={obj.id}
+          imageUrl={obj.image_url}
+          position={obj.position}
+          scale={obj.scale}
+          content={obj.content}
+          isSelected={selectedObjectId === obj.id}
+          onSelect={setSelectedObjectId}
+          isEditMode={isEditMode}
+          transformMode={transformMode}
+          onUpdateTransform={onUpdateTransform}
+          showUI={showUI}
+          onClose={() => setSelectedObjectId(null)}
+          chatOpen={chatOpen}
+        />
+      ))}
+
+      <Mascot
+        selectedObjectId={selectedObjectId}
+        roomData={roomData}
+        mascotState={mascotState}
+        showUI={showUI}
+        onClose={() => setSelectedObjectId(null)}
+        onMascotClick={onMascotClick}
+        isEditMode={isEditMode}
+      />
+    </group>
+  );
+}
+
+export default Scene;
