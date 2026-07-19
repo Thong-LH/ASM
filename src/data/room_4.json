@@ -1,0 +1,27 @@
+{
+  "room_id": "room_4_roadmap",
+  "background": {
+    "url": "/assets/background4.jpeg",
+    "z_index": 0
+  },
+  "interactive_objects": [
+    {
+      "id": "obj_roadmap",
+      "image_url": "/assets/roadmap.jpg",
+      "position": [
+        0,
+        0.2,
+        0.6
+      ],
+      "scale": [
+        0.65,
+        1.28,
+        1
+      ],
+      "content": {
+        "title": "Bản đồ Lộ trình Đổi mới (1986–1996)",
+        "desc": "Tấm bảng tổng kết toàn bộ 8 mốc lịch sử trọng yếu của công cuộc Đổi Mới theo 4 chặng di chuyển chữ Z."
+      }
+    }
+  ]
+}

@@ -1213,7 +1213,8 @@ body,
 }
 
 .side-panel-content {
-  padding: 2.2rem;
+  padding: 1.5rem 1.6rem;
+  /* Giảm padding giúp giao diện gọn gàng hơn */
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1221,37 +1222,43 @@ body,
 }
 
 .panel-badge {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
+  /* Thu nhỏ badge */
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   color: #ff7b00;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
+  /* Giảm khoảng cách dưới */
 }
 
 .panel-title {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
+  /* Thu nhỏ đáng kể kích thước tiêu đề hiện vật */
   font-weight: 800;
   background: linear-gradient(135deg, #ffffff 30%, #a0aec0 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: 0 0 0.4rem 0;
-  line-height: 1.2;
+  margin: 0 0 0.3rem 0;
+  line-height: 1.25;
 }
 
 .panel-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.2 rem;
+  /* Thu nhỏ phụ đề */
   font-weight: 500;
   color: #a0aec0;
-  margin: 0 0 1.2rem 0;
+  margin: 0 0 0.8rem 0;
+  /* Giảm khoảng cách dưới */
   font-style: italic;
 }
 
 .panel-divider {
   height: 1px;
   background: linear-gradient(90deg, rgba(255, 123, 0, 0.5) 0%, rgba(255, 255, 255, 0.05) 100%);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  /* Giảm khoảng cách dưới vách ngăn */
 }
 
 .panel-body {
@@ -1280,8 +1287,10 @@ body,
 }
 
 .panel-paragraph {
-  font-size: 1.2rem;
-  line-height: 1.7;
+  font-size: 1.4rem;
+  /* Tăng kích thước chữ từ 1.2rem lên 1.35rem để dễ đọc hơn */
+  line-height: 1.75;
+  /* Tăng khoảng cách dòng giúp mắt không bị mỏi */
   color: #e2e8f0;
   margin: 0 0 1.2rem 0;
   text-align: justify;
@@ -1384,7 +1393,8 @@ body,
   overflow: hidden;
   /* Ngăn hiện thanh cuộn khi TV container tràn chiều cao */
   opacity: 1;
-  transition: opacity 0.8s ease-in-out; /* Fade-out mượt mà khi thoát ra */
+  transition: opacity 0.8s ease-in-out;
+  /* Fade-out mượt mà khi thoát ra */
   animation: tvFadeIn 0.4s ease-out forwards;
 }
 
@@ -1417,7 +1427,8 @@ body,
   pointer-events: none;
   object-fit: fill;
   /* Khớp tỉ lệ vuông của container */
-  filter: brightness(0.60) contrast(1.05); /* Làm tối xám nhẹ khung gỗ và các chi tiết xung quanh đầu phát */
+  filter: brightness(0.60) contrast(1.05);
+  /* Làm tối xám nhẹ khung gỗ và các chi tiết xung quanh đầu phát */
 }
 
 .tv-screen-video-box {
@@ -1443,12 +1454,15 @@ body,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0; /* Mặc định ẩn video (nền đen của box sẽ hiện lên) */
-  transition: opacity 0.8s ease-in-out; /* Tạo hiệu ứng Fade In / Fade Out mượt mà */
+  opacity: 0;
+  /* Mặc định ẩn video (nền đen của box sẽ hiện lên) */
+  transition: opacity 0.8s ease-in-out;
+  /* Tạo hiệu ứng Fade In / Fade Out mượt mà */
 }
 
 .tv-actual-video.playing {
-  opacity: 1; /* Hiện video lên khi đang phát */
+  opacity: 1;
+  /* Hiện video lên khi đang phát */
 }
 
 .tv-close-btn {
@@ -1470,13 +1484,15 @@ body,
   align-items: center;
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  opacity: 0; /* Ẩn nút X đi theo mặc định */
+  opacity: 0;
+  /* Ẩn nút X đi theo mặc định */
   transition: opacity 0.3s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Hiện nút X khi đưa chuột lại gần vị trí góc trên bên phải */
 .tv-close-btn:hover {
-  opacity: 1; /* Fade-in nút X khi di chuột vào đúng khu vực nút */
+  opacity: 1;
+  /* Fade-in nút X khi di chuột vào đúng khu vực nút */
   background: linear-gradient(135deg, #ff7b00 0%, #ff5100 100%);
   border-color: rgba(255, 255, 255, 0.4);
   transform: scale(1.1);
@@ -1505,7 +1521,8 @@ body,
   /* Nằm trên Canvas 3D (z-index: 1) và dưới TV Video Overlay (z-index: 2000) */
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Đồng bộ 0.8s fade-out */
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  /* Đồng bộ 0.8s fade-out */
 }
 
 .tv-zoom-bg-overlay.dimmed {
@@ -1516,7 +1533,8 @@ body,
 .tv-hotspot-btn {
   position: absolute;
   cursor: pointer;
-  z-index: 25; /* Nằm trên ảnh TV (z-index 10) và khung video (z-index 15) */
+  z-index: 25;
+  /* Nằm trên ảnh TV (z-index 10) và khung video (z-index 15) */
   transition: all 0.2s ease;
   border-radius: 2px;
 }
@@ -1541,7 +1559,8 @@ body,
   color: #ffffff;
   padding: 1.25rem;
   border-radius: 14px;
-  z-index: 3000; /* Nằm trên toàn bộ các lớp phủ khác */
+  z-index: 3000;
+  /* Nằm trên toàn bộ các lớp phủ khác */
   width: 320px;
   max-height: 85vh;
   overflow-y: auto;
@@ -1612,7 +1631,7 @@ body,
   width: 100%;
   background: linear-gradient(135deg, #ff7b00 0%, #ff5100 100%);
   color: white;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0.65rem;
   border-radius: 8px;
   cursor: pointer;
@@ -1631,7 +1650,8 @@ body,
 .tv-edit-toggle-btn {
   position: absolute;
   top: 30px;
-  right: 95px; /* Đặt bên trái nút close (close ở right 30px, width 50px) */
+  right: 95px;
+  /* Đặt bên trái nút close (close ở right 30px, width 50px) */
   background: rgba(13, 15, 18, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
@@ -1657,4 +1677,174 @@ body,
   border-color: #00ffcc;
   transform: scale(1.05);
   box-shadow: 0 4px 20px rgba(0, 255, 204, 0.35);
+}
+
+/* Điều chỉnh chiều cao SidePanel co ngắn lại khi ở chế độ Tour - Trả về mặc định 2rem theo yêu cầu */
+.museum-side-panel.tour-active-adjust {
+  bottom: 2rem !important;
+}
+
+/* Thanh điều hướng Tour mini nằm kề bên hông của khối content (SidePanel), căn giữa trục X trong khoảng không trống còn lại */
+.museum-tour-mini-bar {
+  position: absolute;
+  /* Căn giữa trục X trong không gian trống bên trái SidePanel: (100vw - 2rem - 900px) / 2 */
+  left: calc((100vw - 2rem - 900px) / 2);
+  transform: translateX(-50%);
+  bottom: 2rem;
+  /* Thẳng hàng với mép đáy của SidePanel */
+  width: 320px;
+  /* Nhỏ gọn, chiếm cực ít diện tích màn hình */
+  height: 54px;
+  background: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  color: white;
+  font-family: inherit;
+  box-sizing: border-box;
+  /* Chỉ dùng fadeIn để không bị xung đột đè thuộc tính transform dịch chuyển */
+  animation: tourFadeIn 0.3s ease-out forwards;
+}
+
+/* Nếu SidePanel lật sang trái (left: 2rem, width: 900px), mini-bar tự động căn giữa trong không gian trống bên phải */
+.museum-tour-mini-bar.left-aligned {
+  left: auto;
+  right: calc((100vw - 2rem - 900px) / 2);
+  transform: translateX(50%);
+}
+
+@keyframes tourFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.tour-mini-progress {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffaa00;
+}
+
+.tour-mini-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.tour-mini-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tour-mini-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.tour-mini-btn.primary {
+  background: #ff7b00;
+  border: none;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 123, 0, 0.2);
+}
+
+.tour-mini-btn.primary:hover:not(:disabled) {
+  background: #ff9533;
+  box-shadow: 0 4px 18px rgba(255, 123, 0, 0.35);
+}
+
+.tour-mini-btn.exit {
+  background: rgba(255, 75, 75, 0.08);
+  border-color: rgba(255, 75, 75, 0.2);
+  color: #ff4b4b;
+  padding: 0.4rem 0.6rem;
+}
+
+.tour-mini-btn.exit:hover {
+  background: rgba(255, 75, 75, 0.2);
+  border-color: #ff4b4b;
+}
+
+/* TV Overlay Tour Controls (Cụm điều hướng tour mờ đặt dưới màn hình TV) */
+.tv-tour-controls {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(13, 15, 18, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 1.25rem;
+  border-radius: 30px;
+  z-index: 40;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+}
+
+.tv-tour-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.tv-tour-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.tv-tour-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.tv-tour-btn.exit {
+  background: rgba(255, 75, 75, 0.15);
+  border-color: rgba(255, 75, 75, 0.3);
+  color: #ff4b4b;
+}
+
+.tv-tour-btn.exit:hover {
+  background: rgba(255, 75, 75, 0.3);
+  border-color: #ff4b4b;
+}
+
+.tv-tour-progress-text {
+  color: #ffaa00;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* Roadmap Mini Bar - Mờ mờ (Translucent) mặc định, rà chuột (Hover) mới hiện rõ */
+.roadmap-mini-bar {
+  opacity: 0.35;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.roadmap-mini-bar:hover {
+  opacity: 1 !important;
+  transform: translateX(-50%) translateY(-2px) !important;
+  box-shadow: 0 12px 35px rgba(249, 115, 22, 0.4) !important;
 }

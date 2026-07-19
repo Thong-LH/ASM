@@ -13,7 +13,7 @@ import EditModeToolbar from '../room1/EditModeToolbar';
 const ZOOM_CONFIG = {
   obj_cuonglinh: { zoomDist: 1.1,  camOffsetX: 0.5  }, // Lệch phải -> Hiện vật sang trái
   obj_bieudo:    { zoomDist: 1.25, camOffsetX: 0.65 }, // Lệch phải -> Hiện vật sang trái
-  obj_diacau:    { zoomDist: 1.1,  camOffsetX: -0.55}, // Ở bên phải -> Lệch trái -> Hiện vật sang phải
+  obj_diacau:    { zoomDist: 1.35,  camOffsetX: -0.25, camOffsetY: 0.0 }, // Lệch trái để tránh SidePanel bên trái, zoom xa hơn chút
 };
 
 // Danh sách hiện vật cho AI chat Room 3

@@ -7,11 +7,13 @@ import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import initialRoomData1 from './data/room_1.json';
 import initialRoomData2 from './data/room_2.json';
 import initialRoomData3 from './data/room_3.json';
+import initialRoomData4 from './data/room_4.json';
 
 // Room detailed content data
 import detailedContent1 from './data/detailedContent';
 import detailedContent2 from './data/detailedContent_room2';
 import detailedContent3 from './data/detailedContent_room3';
+import detailedContent4 from './data/detailedContent_room4';
 
 // Chat hook
 import { useGeminiChat } from './hooks/useGeminiChat';
@@ -25,6 +27,31 @@ import ChatBox from './components/room1/ChatBox';
 import EditModeToolbar from './components/room1/EditModeToolbar';
 import Intro from './components/Intro';
 
+const ROOM_TOURS = {
+  room1: [
+    "obj_sogao",
+    "obj_saptien",
+    "obj_loa"
+  ],
+  room2: [
+    "obj_vankien",
+    "obj_tv",
+    "obj_tobao",
+    "obj_sodo",
+    "obj_nghiquyet10",
+    "obj_radio"
+  ],
+  room3: [
+    "obj_cuonglinh",
+    "obj_bieudo",
+    "obj_diacau",
+    "obj_hanhtrinh"
+  ],
+  room4: [
+    "obj_roadmap"
+  ]
+};
+
 const ROOMS_CONFIG = {
   room1: {
     id: 'room1',
@@ -33,14 +60,14 @@ const ROOMS_CONFIG = {
     detailedContent: detailedContent1,
     artifactLinks: [
       { label: 'Sổ Gạo', id: 'obj_sogao' },
-      { label: 'Đồng hồ áp suất', id: 'obj_bangdien' },
+      { label: 'Sấp tiền lạm phát', id: 'obj_saptien' },
       { label: 'Loa Phường', id: 'obj_loa' },
     ],
     welcomeMessage: 'Xin chào! Tôi là hướng dẫn viên tại đây. Giai đoạn 1975–1986 là thời kỳ Bao Cấp — từ cuộc khủng hoảng kinh tế trầm trọng đến những sức ép cải cách trước Đổi Mới. Bạn muốn tìm hiểu điều gì?',
     zoomConfig: {
       obj_sogao: { zoomDist: 1.25, camOffsetX: 0.65 },
       obj_loa: { zoomDist: 1.35, camOffsetX: -0.6 },
-      obj_bangdien: { zoomDist: 1.0, camOffsetX: 0.4 },
+      obj_saptien: { zoomDist: 0.45, camOffsetX: 0.25 },
     }
   },
   room2: {
@@ -60,7 +87,7 @@ const ROOMS_CONFIG = {
     zoomConfig: {
       obj_vankien: { zoomDist: 1.1, camOffsetX: 0.6 },
       obj_tobao: { zoomDist: 1.15, camOffsetX: 0.65 },
-      obj_sodo: { zoomDist: 2, camOffsetX: 1.25 }, // Đồng bộ với thay đổi của bạn để dễ cân chỉnh
+      obj_sodo: { zoomDist: 2, camOffsetX: 1.25 },
       obj_radio: { zoomDist: 1.1, camOffsetX: -0.55 },
       obj_nghiquyet10: { zoomDist: 0.95, camOffsetX: 0.55 },
       obj_tv: { zoomDist: 0.52, camOffsetX: 0, camOffsetY: 0.04 },
@@ -75,28 +102,45 @@ const ROOMS_CONFIG = {
       { label: 'Cương lĩnh 1991', id: 'obj_cuonglinh' },
       { label: 'Biểu đồ phát triển', id: 'obj_bieudo' },
       { label: 'Quả địa cầu hội nhập', id: 'obj_diacau' },
+      { label: 'Hành trình Đổi mới', id: 'obj_hanhtrinh' },
     ],
     welcomeMessage: 'Xin chào! Tôi là hướng dẫn viên tại đây. Phòng này tái hiện các Thành tựu Đổi Mới xuất sắc giai đoạn 1991–1995, giúp đất nước thoát khỏi khủng hoảng kinh tế và bắt đầu hội nhập thế giới. Bạn muốn tìm hiểu điều gì?',
     zoomConfig: {
       obj_cuonglinh: { zoomDist: 1.1, camOffsetX: 0.5 },
-      obj_bieudo: { zoomDist: 1.25, camOffsetX: 0.65 },
-      obj_diacau: { zoomDist: 1.1, camOffsetX: -0.55 },
+      obj_bieudo: { zoomDist: 2, camOffsetX: 1.2 },
+      obj_diacau: { zoomDist: 1.35, camOffsetX: -0.5, camOffsetY: 0.0 },
+      obj_hanhtrinh: { zoomDist: 1, camOffsetX: 0.0, camOffsetY: 0.42 },
+    }
+  },
+  room4: {
+    id: 'room4',
+    name: 'Phòng 4: Lộ trình Đổi Mới',
+    initialData: initialRoomData4,
+    detailedContent: detailedContent4,
+    artifactLinks: [
+      { label: 'Bản đồ Roadmap 10 năm', id: 'obj_roadmap' },
+    ],
+    welcomeMessage: 'Xin chào! Chào mừng bạn đến với Phòng 4 - Tổng kết Lộ trình Đổi Mới (1986–1996). Bạn hãy bấm vào tấm bảng Roadmap lơ lửng để trải nghiệm chuyến tham quan quét camera chữ Z!',
+    zoomConfig: {
+      obj_roadmap: { zoomDist: 1.6, camOffsetX: 0.0, camOffsetY: 0.06 }
     }
   }
 };
 
 export default function App() {
-  const [currentRoom, setCurrentRoom] = useState('room2'); // Chuyển Room 2 lên đầu
+  const [currentRoom, setCurrentRoom] = useState('room1');
   const [prevRoom, setPrevRoom] = useState(null);
   const [exitingToRoom, setExitingToRoom] = useState(null);
-  const [isEntered, setIsEntered] = useState(true); // Tạm tắt màn hình Intro và bỏ qua Room 1 để vào thẳng Room 2
+  const [isEntered, setIsEntered] = useState(false);
 
-  // Lưu trữ dữ liệu riêng cho 3 phòng để giữ được các thay đổi chỉnh sửa vị trí (edit mode)
+  // Lưu trữ dữ liệu riêng cho các phòng
   const [roomData1, setRoomData1] = useState(ROOMS_CONFIG.room1.initialData);
   const [roomData2, setRoomData2] = useState(ROOMS_CONFIG.room2.initialData);
   const [roomData3, setRoomData3] = useState(ROOMS_CONFIG.room3.initialData);
+  const [roomData4, setRoomData4] = useState(ROOMS_CONFIG.room4.initialData);
 
   const [selectedObjectId, setSelectedObjectId] = useState(null);
+  const [roadmapStage, setRoadmapStage] = useState(0); // Chặng Z-Pattern của Roadmap (0: Chưa chọn, 1->4: 4 chặng)
   const [isEditMode, setIsEditMode] = useState(false);
   const [transformMode, setTransformMode] = useState('translate');
   const [showUI, setShowUI] = useState(false);
@@ -110,6 +154,9 @@ export default function App() {
   const [tvEditorOpen, setTvEditorOpen] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [tvExiting, setTvExiting] = useState(false);
+  const [tourActive, setTourActive] = useState(false);
+  const [tourIndex, setTourIndex] = useState(0);
+  const [pendingTourObject, setPendingTourObject] = useState(null);
   const [copied, setCopied] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -117,13 +164,86 @@ export default function App() {
   const [mascotState, setMascotState] = useState('idle');
   const [contextText, setContextText] = useState('');
 
+  const [userZoomOffset, setUserZoomOffset] = useState(0); // Độ lệch Zoom tự do do người dùng cuộn chuột hoặc bấm nút Zoom
+  const [userPanOffset, setUserPanOffset] = useState({ x: 0, y: 0 }); // Độ lệch Kéo thả chuột (Mouse Drag Pan)
+
+  // Reset roadmapStage, userZoomOffset & userPanOffset khi hủy chọn hiện vật / đổi chặng
+  useEffect(() => {
+    if (!selectedObjectId) setRoadmapStage(0);
+    setUserZoomOffset(0);
+    setUserPanOffset({ x: 0, y: 0 });
+  }, [selectedObjectId, roadmapStage]);
+
+  // Hỗ trợ cuộn bánh xe chuột (Mouse Wheel) để Zoom tự do khi xem hiện vật / Roadmap
+  useEffect(() => {
+    if (!selectedObjectId || isEditMode) return;
+    const handleWheel = (e) => {
+      const delta = e.deltaY > 0 ? 0.08 : -0.08;
+      setUserZoomOffset(prev => Math.min(0.8, Math.max(-0.5, prev + delta)));
+    };
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [selectedObjectId, isEditMode]);
+
+  // Hỗ trợ kéo thả chuột (Mouse Drag Pan) để di chuyển tự do trong không gian
+  useEffect(() => {
+    if (!selectedObjectId || isEditMode) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const handlePointerDown = (e) => {
+      // Chỉ kéo thả khi nhấp chuột trên khu vực canvas
+      if (e.button !== 0) return;
+      // Tránh ăn sự kiện khi nhấp vào các nút UI
+      if (e.target.closest('.ui-interactive') || e.target.closest('.roadmap-mini-bar') || e.target.closest('.museum-header')) return;
+
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      document.body.style.cursor = 'grabbing';
+    };
+
+    const handlePointerMove = (e) => {
+      if (!isDragging) return;
+      const deltaX = (e.clientX - startX) * 0.0012; // Giảm độ nhạy kéo thả
+      const deltaY = (e.clientY - startY) * 0.0012;
+      startX = e.clientX;
+      startY = e.clientY;
+
+      // Giới hạn kéo thả strictly xung quanh chặng hiện tại (x: [-0.4, 0.4], y: [-0.3, 0.3])
+      setUserPanOffset(prev => ({
+        x: Math.min(0.4, Math.max(-0.4, prev.x - deltaX)),
+        y: Math.min(0.3, Math.max(-0.3, prev.y + deltaY))
+      }));
+    };
+
+    const handlePointerUp = () => {
+      if (isDragging) {
+        isDragging = false;
+        document.body.style.cursor = 'auto';
+      }
+    };
+
+    window.addEventListener('pointerdown', handlePointerDown);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+
+    return () => {
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+    };
+  }, [selectedObjectId, isEditMode]);
+
   // Trích xuất cấu hình phòng hiện tại
   const config = ROOMS_CONFIG[currentRoom];
-  const activeRoomData = currentRoom === 'room1' ? roomData1 : currentRoom === 'room2' ? roomData2 : roomData3;
+  const activeRoomData = currentRoom === 'room1' ? roomData1 : currentRoom === 'room2' ? roomData2 : currentRoom === 'room3' ? roomData3 : roomData4;
 
   // Tính toán hướng bay đổi phòng
   const getTransitionDirection = (from, to) => {
-    const orders = { room1: 1, room2: 2, room3: 3 };
+    const orders = { room1: 1, room2: 2, room3: 3, room4: 4 };
     if (!from || !to) return null;
     return orders[to] > orders[from] ? 'forward' : 'backward';
   };
@@ -131,10 +251,12 @@ export default function App() {
   const entryDirection = getTransitionDirection(prevRoom, currentRoom);
   const exitDirection = exitingToRoom ? getTransitionDirection(currentRoom, exitingToRoom) : null;
 
-  const handleRoomSwitch = (targetRoom) => {
+  const handleRoomSwitch = (targetRoom, isTourSwitch = false) => {
     if (targetRoom === currentRoom) return;
     setDropdownOpen(false);
     setSelectedObjectId(null); // Đóng hiện vật cũ
+    setRoadmapStage(0);
+    if (!isTourSwitch) setTourActive(false); // Reset trạng thái tour nếu đổi phòng thủ công
     setExitingToRoom(targetRoom);
   };
 
@@ -142,68 +264,109 @@ export default function App() {
     setPrevRoom(currentRoom);
     setCurrentRoom(exitingToRoom);
     setExitingToRoom(null);
+
+    if (pendingTourObject) {
+      const targetId = pendingTourObject;
+      setPendingTourObject(null);
+
+      if (tourActive) {
+        setTimeout(() => {
+          setSelectedObjectId(targetId);
+        }, 1800);
+      }
+    }
   };
 
-  // Kích hoạt mờ nền đen ngay khi bắt đầu zoom Tivi
-  useEffect(() => {
-    if (selectedObjectId === 'obj_tv') {
-      const timer = setTimeout(() => {
-        setTvZoomActive(true);
-      }, 50); // Chờ 50ms để React render div rồi mới kích hoạt transition
-      return () => clearTimeout(timer);
-    } else {
-      setTvZoomActive(false);
-      setIsVideoPlaying(false); // Reset trạng thái video khi tắt tivi
-    }
-  }, [selectedObjectId]);
+  // Khởi tạo Gemini Chat Hook
+  const chatHook = useGeminiChat({
+    activeRoomId: currentRoom,
+    activeRoomData: activeRoomData,
+    detailedContent: config.detailedContent,
+    welcomeMessage: config.welcomeMessage,
+    onMascotStateChange: setMascotState
+  });
 
-  // Hàm đóng Tivi kèm hiệu ứng Fade-Out mượt mà
+  // Chuyển câu hỏi ngữ cảnh về cho Chatbox khi chọn hiện vật
+  useEffect(() => {
+    if (selectedObjectId) {
+      const currentObj = activeRoomData.interactive_objects.find(o => o.id === selectedObjectId);
+      if (currentObj) {
+        const fullContent = config.detailedContent[selectedObjectId];
+        const text = fullContent
+          ? `${fullContent.title}: ${fullContent.paragraphs.join(' ')}`
+          : `${currentObj.content.title}: ${currentObj.content.desc}`;
+        setContextText(text);
+      }
+    }
+  }, [selectedObjectId, activeRoomData, config.detailedContent]);
+
   const closeTV = () => {
-    setIsVideoPlaying(false); // 1. Mờ dần video về nền đen
-    setTvZoomActive(false);   // 2. Mờ dần lớp nền đen toàn màn hình về trong suốt
-    setTvExiting(true);       // 3. Kích hoạt class tv-exit-active để mờ dần tivi
-    
-    // 4. Chờ 800ms cho các transition CSS hoàn tất rồi mới tắt hẳn trạng thái để camera zoom-out
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+    setIsVideoPlaying(false);
+    setTvZoomActive(false);
+    setTvExiting(true);
     setTimeout(() => {
       setSelectedObjectId(null);
       setTvExiting(false);
-    }, 800);
+    }, 400);
   };
 
-  // Tải nội dung giáo trình
-  useEffect(() => {
-    Promise.all([
-      fetch('/data/summary.txt').then(res => res.text()).catch(() => ""),
-      fetch('/data/textbook.txt').then(res => res.text()).catch(() => "")
-    ]).then(([summary, textbook]) => {
-      setContextText(`${summary}\n\n========================================\n\n${textbook}`);
-    }).catch(err => {
-      console.error('Không thể tải giáo trình:', err);
-    });
-  }, []);
+  // --- HỆ THỐNG DẪN TOUR TỰ ĐỘNG ---
+  const startTour = () => {
+    setDropdownOpen(false);
+    const firstRoomTour = ROOM_TOURS[currentRoom];
+    if (firstRoomTour && firstRoomTour.length > 0) {
+      setTourActive(true);
+      setTourIndex(0);
+      setSelectedObjectId(firstRoomTour[0]);
+    }
+  };
 
-  // Khởi tạo Chatbox AI
-  const chatHook = useGeminiChat({
-    contextText,
-    setSelectedObjectId,
-    setChatOpen,
-    welcomeMessage: config.welcomeMessage,
-    artifactLinks: config.artifactLinks,
-  });
+  const exitTour = () => {
+    setTourActive(false);
+    setTourIndex(0);
+    setSelectedObjectId(null);
+    setRoadmapStage(0);
+  };
 
-  // Đồng bộ cử chỉ mascot
-  useEffect(() => {
-    if (chatHook.loading) setMascotState('thinking');
-    else if (selectedObjectId) setMascotState('pointing');
-    else if (chatOpen) setMascotState('welcome');
-    else setMascotState('idle');
-  }, [chatHook.loading, selectedObjectId, chatOpen]);
+  const handleNext = () => {
+    const tourList = ROOM_TOURS[currentRoom];
+    if (!tourList) return;
 
-  // Query parameter ?edit=true
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('edit') === 'true') setIsEditMode(true);
-  }, []);
+    if (tourIndex < tourList.length - 1) {
+      const nextIndex = tourIndex + 1;
+      setTourIndex(nextIndex);
+      setSelectedObjectId(tourList[nextIndex]);
+    } else {
+      const roomOrder = ['room1', 'room2', 'room3', 'room4'];
+      const currentRoomIdx = roomOrder.indexOf(currentRoom);
+      if (currentRoomIdx < roomOrder.length - 1) {
+        const nextRoom = roomOrder[currentRoomIdx + 1];
+        const nextRoomTour = ROOM_TOURS[nextRoom];
+        if (nextRoomTour && nextRoomTour.length > 0) {
+          setTourIndex(0);
+          setPendingTourObject(nextRoomTour[0]);
+          handleRoomSwitch(nextRoom, true);
+        }
+      } else {
+        exitTour();
+      }
+    }
+  };
+
+  const handlePrev = () => {
+    const tourList = ROOM_TOURS[currentRoom];
+    if (!tourList) return;
+
+    if (tourIndex > 0) {
+      const prevIndex = tourIndex - 1;
+      setTourIndex(prevIndex);
+      setSelectedObjectId(tourList[prevIndex]);
+    }
+  };
 
   const handleUpdateTransform = (id, newPosition, newScale) => {
     const updateFn = (prevData) => ({
@@ -216,6 +379,7 @@ export default function App() {
     if (currentRoom === 'room1') setRoomData1(updateFn);
     else if (currentRoom === 'room2') setRoomData2(updateFn);
     else if (currentRoom === 'room3') setRoomData3(updateFn);
+    else if (currentRoom === 'room4') setRoomData4(updateFn);
   };
 
   return (
@@ -245,6 +409,9 @@ export default function App() {
                 <button className={`dropdown-item ${currentRoom === 'room3' ? 'active' : ''}`} onClick={() => handleRoomSwitch('room3')}>
                   Phòng 3: Thành tựu 1991–1995
                 </button>
+                <button className={`dropdown-item ${currentRoom === 'room4' ? 'active' : ''}`} onClick={() => handleRoomSwitch('room4')}>
+                  Phòng 4: Lộ trình Đổi Mới
+                </button>
               </div>
             )}
           </div>
@@ -254,6 +421,9 @@ export default function App() {
           </button>
           <button className="nav-btn" onClick={() => setModalContent({ title: "Phụ Lục AI & Hướng Dẫn Viên Ảo", desc: "Hệ thống AI hướng dẫn viên đang được phát triển." })}>
             Phụ Lục AI
+          </button>
+          <button className="nav-btn tour-start-btn" onClick={startTour} style={{ background: 'rgba(0, 255, 204, 0.15)', color: '#00ffcc', borderColor: '#00ffcc' }}>
+            🚶 Tham Quan Tour
           </button>
         </div>
 
@@ -279,12 +449,12 @@ export default function App() {
         </div>
       </header>
 
-      {/* R3F Canvas - Đóng vai trò Global Canvas (Gắn chặt duy nhất 1 lần, không bị re-mount) */}
+      {/* R3F Canvas - Đóng vai trò Global Canvas */}
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50, near: 0.1, far: 50 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        dpr={[1, 1.5]} /* Giới hạn tỉ lệ pixel thiết bị ở mức 1.5x giúp mượt mà 60 FPS trên màn hình Retina/4K */
-        onPointerMissed={() => { if (!isEditMode) setSelectedObjectId(null); }}
+        dpr={[1, 1.5]}
+        onPointerMissed={() => { if (!isEditMode) { setSelectedObjectId(null); setRoadmapStage(0); } }}
       >
         <ambientLight intensity={0.8} />
         <directionalLight position={[0, 5, 5]} intensity={1} />
@@ -308,11 +478,14 @@ export default function App() {
             setShowUI={setShowUI}
             mascotState={mascotState}
             chatOpen={chatOpen}
-            onMascotClick={() => setChatOpen(true)}
+            onMascotClick={() => { setChatOpen(true); setMascotState('welcome'); }}
             zoomConfig={config.zoomConfig}
             entryDirection={entryDirection}
             exitDirection={exitDirection}
             onExitComplete={handleExitComplete}
+            roadmapStage={roadmapStage}
+            userZoomOffset={userZoomOffset}
+            userPanOffset={userPanOffset}
           />
         </Suspense>
       </Canvas>
@@ -334,11 +507,20 @@ export default function App() {
 
       <SidePanel
         selectedObjectId={selectedObjectId}
-        showUI={showUI && selectedObjectId !== 'obj_tv'}
+        showUI={showUI && selectedObjectId !== 'obj_tv' && selectedObjectId !== 'obj_hanhtrinh' && selectedObjectId !== 'obj_roadmap'}
         isEditMode={isEditMode}
         roomData={activeRoomData}
-        onClose={() => setSelectedObjectId(null)}
+        onClose={() => { setSelectedObjectId(null); setRoadmapStage(0); }}
         detailedContent={config.detailedContent}
+        tourActive={tourActive}
+        tourIndex={tourIndex}
+        tourLength={ROOM_TOURS[currentRoom]?.length || 0}
+        isLastRoom={currentRoom === 'room4'}
+        onNext={handleNext}
+        onPrev={handlePrev}
+        onExit={exitTour}
+        roadmapStage={roadmapStage}
+        setRoadmapStage={setRoadmapStage}
       />
 
       {/* Lớp phủ đen mờ dần khi camera phóng vào Tivi */}
@@ -352,18 +534,17 @@ export default function App() {
           <div className="tv-video-container">
             <img src="/assets/tv.png" className="tv-frame-overlay" alt="TV Frame" />
             <div className="tv-screen-video-box">
-              <video 
+              <video
                 ref={videoRef}
-                src="/assets/video_lichsu.mp4" 
-                controls 
+                src="/assets/video_lichsu.mp4"
+                controls
                 playsInline
                 onEnded={closeTV}
                 className={`tv-actual-video ${isVideoPlaying ? 'playing' : ''}`}
               />
             </div>
-            
-            {/* 3 nút bấm vật lý tương tác trực tiếp */}
-            <div 
+
+            <div
               className="tv-hotspot-btn play"
               style={{
                 left: `${tvButtons.play.left}%`,
@@ -377,7 +558,7 @@ export default function App() {
               }}
               title="Phát Video (Play)"
             />
-            <div 
+            <div
               className="tv-hotspot-btn stop"
               style={{
                 left: `${tvButtons.stop.left}%`,
@@ -391,7 +572,7 @@ export default function App() {
               }}
               title="Dừng Video (Pause)"
             />
-            <div 
+            <div
               className="tv-hotspot-btn close"
               style={{
                 left: `${tvButtons.close.left}%`,
@@ -402,12 +583,36 @@ export default function App() {
               onClick={closeTV}
               title="Tắt Tivi (Close)"
             />
-
           </div>
 
           <button className="tv-close-btn" onClick={closeTV} title="Đóng (Quay lại)">
             ✕
           </button>
+
+          {tourActive && (
+            <div className="tv-tour-controls">
+              <button
+                className="tv-tour-btn prev"
+                onClick={handlePrev}
+                disabled={tourIndex === 0}
+              >
+                ◀ Trước
+              </button>
+              <span className="tv-tour-progress-text">
+                {tourIndex + 1} / {ROOM_TOURS[currentRoom]?.length || 0}
+              </span>
+              <button
+                className="tv-tour-btn next"
+                onClick={handleNext}
+                disabled={tourIndex === (ROOM_TOURS[currentRoom]?.length || 0) - 1 && currentRoom === 'room4'}
+              >
+                {tourIndex === (ROOM_TOURS[currentRoom]?.length || 0) - 1 && currentRoom !== 'room4' ? "Sang phòng kế ▶" : "Tiếp tục ▶"}
+              </button>
+              <button className="tv-tour-btn exit" onClick={exitTour}>
+                Thoát Tour
+              </button>
+            </div>
+          )}
         </div>
       )}
 
@@ -434,7 +639,11 @@ export default function App() {
       {!isEditMode && !selectedObjectId && currentRoom !== 'room1' && (
         <button
           className="room-nav-arrow left ui-interactive"
-          onClick={() => handleRoomSwitch(currentRoom === 'room3' ? 'room2' : 'room1')}
+          onClick={() => {
+            const roomOrder = ['room1', 'room2', 'room3', 'room4'];
+            const idx = roomOrder.indexOf(currentRoom);
+            if (idx > 0) handleRoomSwitch(roomOrder[idx - 1]);
+          }}
           title="Quay lại phòng trước"
         >
           <ChevronLeft size={24} />
@@ -442,14 +651,195 @@ export default function App() {
       )}
 
       {/* Nút mũi tên chuyển sang Phải (Tiến tới phòng tiếp theo) */}
-      {!isEditMode && !selectedObjectId && currentRoom !== 'room3' && (
+      {!isEditMode && !selectedObjectId && currentRoom !== 'room4' && (
         <button
           className="room-nav-arrow right ui-interactive"
-          onClick={() => handleRoomSwitch(currentRoom === 'room1' ? 'room2' : 'room3')}
+          onClick={() => {
+            const roomOrder = ['room1', 'room2', 'room3', 'room4'];
+            const idx = roomOrder.indexOf(currentRoom);
+            if (idx < roomOrder.length - 1) handleRoomSwitch(roomOrder[idx + 1]);
+          }}
           title="Tiến tới phòng tiếp theo"
         >
           <ChevronRight size={24} />
         </button>
+      )}
+
+      {/* Mini Bar điều hướng Z-Pattern cho Roadmap (Không dùng SidePanel) */}
+      {selectedObjectId === 'obj_roadmap' && showUI && (
+        <div
+          className="roadmap-mini-bar ui-interactive"
+          style={{
+            position: 'fixed',
+            bottom: '25px', // Trả về cạnh dưới đáy màn hình
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(20, 12, 6, 0.88)',
+            backdropFilter: 'blur(14px)',
+            border: '1px solid rgba(249, 115, 22, 0.5)',
+            borderRadius: '30px',
+            padding: '6px 20px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '14px',
+            zIndex: 9999,
+            boxShadow: '0 8px 30px rgba(249, 115, 22, 0.25)',
+            animation: 'fadeInUp 0.3s ease'
+          }}
+        >
+          {roadmapStage === 0 ? (
+            /* Khi mới zoom vào tổng quan: Nút màu CAM rực rỡ */
+            <React.Fragment>
+              <button
+                onClick={() => setRoadmapStage(1)}
+                style={{
+                  background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '20px',
+                  padding: '8px 22px',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                  fontWeight: 'bold',
+                  boxShadow: '0 3px 14px rgba(249, 115, 22, 0.45)',
+                  transition: 'transform 0.2s, box-shadow 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                🚀 Khám phá Lộ trình chữ Z ▶
+              </button>
+              <button
+                onClick={() => { setSelectedObjectId(null); setRoadmapStage(0); }}
+                style={{
+                  background: 'transparent',
+                  color: '#fdba74',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  padding: '0 4px',
+                  transition: 'color 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#ef4444'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#fdba74'}
+                title="Thoát"
+              >
+                ✕
+              </button>
+            </React.Fragment>
+          ) : (
+            /* Khi đang xem từng chặng (1 -> 4): Menu Cam rực rỡ */
+            <React.Fragment>
+              <button
+                onClick={() => setRoadmapStage(prev => Math.max(1, prev - 1))}
+                disabled={roadmapStage === 1}
+                style={{
+                  background: roadmapStage === 1 ? 'rgba(255,255,255,0.05)' : 'rgba(249, 115, 22, 0.18)',
+                  color: roadmapStage === 1 ? '#4a5568' : '#ffedd5',
+                  border: '1px solid rgba(249, 115, 22, 0.35)',
+                  borderRadius: '20px',
+                  padding: '6px 16px',
+                  cursor: roadmapStage === 1 ? 'not-allowed' : 'pointer',
+                  fontSize: '0.85rem',
+                  fontWeight: 'bold',
+                  transition: 'background 0.2s, color 0.2s'
+                }}
+              >
+                ◀ Lùi lại
+              </button>
+
+              <span style={{ color: '#ffedd5', fontSize: '0.9rem', fontWeight: '600', minWidth: '220px', textAlign: 'center', letterSpacing: '0.02em' }}>
+                {roadmapStage === 1 && "Chặng 1/4: Bối cảnh & Tìm tòi"}
+                {roadmapStage === 2 && "Chặng 2/4: Đại hội VI & Đổi mới"}
+                {roadmapStage === 3 && "Chặng 3/4: Bứt phá Khoán 10"}
+                {roadmapStage === 4 && "Chặng 4/4: Thành tựu & Hội nhập 🎉"}
+              </span>
+
+              <button
+                onClick={() => {
+                  if (roadmapStage < 4) setRoadmapStage(prev => prev + 1);
+                  else { setSelectedObjectId(null); setRoadmapStage(0); }
+                }}
+                style={{
+                  background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '20px',
+                  padding: '6px 18px',
+                  cursor: 'pointer',
+                  fontSize: '0.85rem',
+                  fontWeight: 'bold',
+                  boxShadow: '0 3px 14px rgba(249, 115, 22, 0.45)',
+                  transition: 'transform 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                {roadmapStage === 4 ? "Hoàn thành ✕" : "Chặng tiếp ▶"}
+              </button>
+
+              {/* Cụm Nút Zoom Tự Do (Hỗ trợ cuộn chuột hoặc bấm nút cho Giáo viên) */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '2px', background: 'rgba(249, 115, 22, 0.15)', border: '1px solid rgba(249, 115, 22, 0.3)', borderRadius: '20px', padding: '2px 8px', marginLeft: '4px' }}>
+                <button
+                  onClick={() => setUserZoomOffset(prev => Math.min(0.8, prev + 0.15))}
+                  style={{ background: 'transparent', border: 'none', color: '#fdba74', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold', padding: '2px 6px' }}
+                  title="Thu nhỏ (- / Cuộn chuột xuống)"
+                >
+                  🔍-
+                </button>
+                <span style={{ fontSize: '0.78rem', color: '#ffedd5', fontWeight: 'bold', minWidth: '42px', textAlign: 'center' }}>
+                  {Math.round((1 / (1 + userZoomOffset)) * 100)}%
+                </span>
+                <button
+                  onClick={() => setUserZoomOffset(prev => Math.max(-0.5, prev - 0.15))}
+                  style={{ background: 'transparent', border: 'none', color: '#fdba74', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold', padding: '2px 6px' }}
+                  title="Phóng to (+ / Cuộn chuột lên)"
+                >
+                  🔍+
+                </button>
+              </div>
+
+              {(userZoomOffset !== 0 || userPanOffset.x !== 0 || userPanOffset.y !== 0) && (
+                <button
+                  onClick={() => { setUserZoomOffset(0); setUserPanOffset({ x: 0, y: 0 }); }}
+                  style={{
+                    background: 'rgba(239, 68, 68, 0.2)',
+                    color: '#fca5a5',
+                    border: '1px solid rgba(239, 68, 68, 0.4)',
+                    borderRadius: '15px',
+                    padding: '2px 8px',
+                    cursor: 'pointer',
+                    fontSize: '0.78rem',
+                    fontWeight: 'bold',
+                    marginLeft: '2px',
+                    transition: 'background 0.2s'
+                  }}
+                  title="Đặt lại góc nhìn chuẩn chặng"
+                >
+                  🎯 Reset
+                </button>
+              )}
+
+              <button
+                onClick={() => { setSelectedObjectId(null); setRoadmapStage(0); }}
+                style={{
+                  background: 'transparent',
+                  color: '#fdba74',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  padding: '0 4px',
+                  transition: 'color 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#ef4444'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#fdba74'}
+                title="Thoát"
+              >
+                ✕
+              </button>
+            </React.Fragment>
+          )}
+        </div>
       )}
 
       {/* Màn hình Intro mở đầu (Che phủ Canvas chạy ngầm bên dưới) */}

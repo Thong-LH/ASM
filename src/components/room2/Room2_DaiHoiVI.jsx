@@ -88,12 +88,12 @@ export default function Room2_DaiHoiVI({ onRoomChange, prevRoom }) {
     if (params.get('edit') === 'true') setIsEditMode(true);
   }, []);
 
-  // Kích hoạt mờ nền đen ngay khi bắt đầu zoom Tivi
+  // Kích hoạt mờ nền đen sau khi camera 3D đã zoom sát vào mặt kính Tivi (1300ms)
   useEffect(() => {
     if (selectedObjectId === 'obj_tv') {
       const timer = setTimeout(() => {
         setTvZoomActive(true);
-      }, 50); // Chờ 50ms để React render div rồi mới kích hoạt transition
+      }, 1300); // Chờ 1300ms cho camera 3D zoom mạnh vào Tivi rồi mới phủ đen mở video
       return () => clearTimeout(timer);
     } else {
       setTvZoomActive(false);

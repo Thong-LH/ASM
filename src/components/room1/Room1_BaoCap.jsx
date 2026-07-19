@@ -172,6 +172,7 @@ export default function Room1_BaoCap({ onRoomChange, prevRoom }) {
             mascotState={mascotState}
             chatOpen={chatOpen}
             onMascotClick={() => setChatOpen(true)}
+            zoomConfig={zoomConfig}
             entryDirection={entryDirection}
             exitDirection={exitDirection}
             onExitComplete={() => onRoomChange(exitingToRoom)}

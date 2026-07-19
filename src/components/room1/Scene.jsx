@@ -20,6 +20,7 @@ function Scene({
   mascotState,
   chatOpen,
   onMascotClick,
+  zoomConfig = {},
   entryDirection,
   exitDirection,
   onExitComplete
@@ -41,20 +42,10 @@ function Scene({
 
         const [x, y, z] = targetObj.position;
 
-        // Cấu hình khoảng cách Zoom và độ lệch Camera tùy chỉnh cho từng hiện vật
-        let zoomDist = 1.0;
-        let camOffsetX = 0.5;
-
-        if (targetObj.id === 'obj_sogao') {
-          zoomDist = 1.25;
-          camOffsetX = 0.65;
-        } else if (targetObj.id === 'obj_loa') {
-          zoomDist = 1.35;
-          camOffsetX = -0.6;
-        } else if (targetObj.id === 'obj_bangdien') {
-          zoomDist = 1.0;
-          camOffsetX = 0.4;
-        }
+        // Đọc cấu hình khoảng cách Zoom và độ lệch Camera từ zoomConfig prop
+        const cfg = zoomConfig[targetObj.id] || { zoomDist: 1.0, camOffsetX: 0.4 };
+        const zoomDist = cfg.zoomDist ?? 1.0;
+        const camOffsetX = cfg.camOffsetX ?? 0.4;
 
         const targetCamPos = new Vector3(x + camOffsetX, y, z + zoomDist);
         const targetLookAt = new Vector3(x + camOffsetX, y, z);

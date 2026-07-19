@@ -421,7 +421,7 @@ function Scene({
         const [x, y, z] = targetObj.position;
 
         // Thiết lập lệch camera tùy theo vật thể để dành không gian cho bảng thông tin
-        // Sổ gạo (obj_sogao) và Đồng hồ (obj_bangdien) lệch phải -> Đẩy vật thể sang trái màn hình
+        // Sổ gạo (obj_sogao) và Đồng hồ (obj_saptien) lệch phải -> Đẩy vật thể sang trái màn hình
         // Loa phường (obj_loa) lệch trái -> Đẩy vật thể sang phải màn hình
         // Cấu hình khoảng cách Zoom và độ lệch Camera tùy chỉnh cho từng hiện vật để tránh đè lấp nội dung
         let zoomDist = 1.0;
@@ -433,7 +433,7 @@ function Scene({
         } else if (targetObj.id === 'obj_loa') {
           zoomDist = 1.35;
           camOffsetX = -0.6; // Đẩy loa phường sát biên phải hơn khi zoom xa
-        } else if (targetObj.id === 'obj_bangdien') {
+        } else if (targetObj.id === 'obj_saptien') {
           zoomDist = 1.0;
           camOffsetX = 0.4;  // Đẩy đồng hồ sát biên trái khi zoom gần
         }
@@ -563,13 +563,14 @@ const detailedContent = {
   obj_sogao: {
     title: "Khủng hoảng Lương thực",
     subtitle: "Phao cứu sinh thời bao cấp",
+    imageUrl: "/assets/baocap.png",
     paragraphs: [
       "Trong giai đoạn trước Đổi Mới (1976-1985), nền kinh tế Việt Nam rơi vào tình trạng khủng hoảng lương thực vô cùng trầm trọng. Do cơ chế kế hoạch hóa tập trung và ngăn sông cấm chợ, việc phân phối lương thực hoàn toàn phụ thuộc vào Nhà nước.",
       "Cuốn sổ gạo được xem là vật bất ly thân, 'phao cứu sinh' quyết định sự sống còn của mỗi gia đình. Để mua được vài kilôgam gạo mốc hay ngô hột, người dân phải xếp hàng từ tờ mờ sáng, đôi khi phải đặt gạch, nón lá để giữ chỗ suốt nhiều tiếng đồng hồ.",
       "Cơ chế tem phiếu này chỉ thực sự bị xóa bỏ khi Đại hội VI (12/1986) quyết định thực hiện đường lối Đổi Mới toàn diện, chuyển đổi sang nền kinh tế hàng hóa nhiều thành phần vận hành theo cơ chế thị trường."
     ]
   },
-  obj_bangdien: {
+  obj_saptien: {
     title: "Lạm Phát Phi Mã 774%",
     subtitle: "Đỉnh điểm khủng hoảng Giá - Lương - Tiền 1986",
     paragraphs: [
@@ -707,7 +708,7 @@ export default function Room1_BaoCap() {
       return "Theo tài liệu Chương 3: **Khoán 10** được ban hành vào ngày 5/4/1988 (Nghị quyết số 10-NQ/TW của Bộ Chính trị) về đổi mới quản lý kinh tế nông nghiệp. Nội dung cốt lõi là giao quyền **tự chủ sản xuất** cho hộ nông dân và khoán ruộng ổn định trong 15 năm. Nhờ vậy, từ chỗ thiếu đói, đến năm 1989 Việt Nam đã sản xuất đủ ăn và lần đầu tiên xuất khẩu gạo ra thế giới. Bạn có thể xem thêm hiện vật liên quan tại [Sổ Gạo](obj_sogao).";
     }
     if (q.includes('lạm phát') || q.includes('774') || q.includes('phi mã')) {
-      return "Theo tài liệu: Cuối giai đoạn 1975-1986, **lạm phát phi mã** lên đến mức đỉnh điểm 774% vào năm 1986. Tiền mất giá nghiêm trọng, sản xuất đình đốn. Nhờ công cuộc **Đổi mới** sau đó, lạm phát giảm dần: từ 67.1% năm 1991 xuống còn 12.7% năm 1995, giúp đất nước chính thức thoát khỏi khủng hoảng kinh tế - xã hội. Xem thêm hiện vật tại [Đồng hồ áp suất](obj_bangdien).";
+      return "Theo tài liệu: Cuối giai đoạn 1975-1986, **lạm phát phi mã** lên đến mức đỉnh điểm 774% vào năm 1986. Tiền mất giá nghiêm trọng, sản xuất đình đốn. Nhờ công cuộc **Đổi mới** sau đó, lạm phát giảm dần: từ 67.1% năm 1991 xuống còn 12.7% năm 1995, giúp đất nước chính thức thoát khỏi khủng hoảng kinh tế - xã hội. Xem thêm hiện vật tại [Sấp tiền lạm phát](obj_saptien).";
     }
     if (q.includes('đại hội 6') || q.includes('đại hội vi') || q.includes('đổi mới') || q.includes('1986')) {
       return "**Đại hội VI** (12/1986) khởi xướng đường lối **Đổi mới toàn diện**, chuyển từ nền kinh tế kế hoạch tập trung bao cấp sang **kinh tế hàng hóa nhiều thành phần**. Để biết thêm về phương tiện tuyên truyền và bối cảnh quốc tế lúc đó, hãy xem [Loa Phường](obj_loa).";
@@ -730,7 +731,7 @@ export default function Room1_BaoCap() {
       }
     }
 
-    return "Tôi là **Hướng dẫn viên ảo**. Hiện tại bạn chưa thiết lập Gemini API Key (hãy click biểu tượng ⚙️ ở đầu khung chat để dán Key miễn phí từ Google AI Studio).\n\nTuy nhiên, dựa trên tóm tắt chương học, tôi có thể giải đáp các câu hỏi chứa từ khóa như: **Đại hội VI**, **Khoán 10**, **Lạm phát 774%**, thời **Bao Cấp**... Bạn có thể khám phá các hiện vật bằng cách bấm: [Sổ Gạo](obj_sogao), [Đồng hồ áp suất](obj_bangdien), hoặc [Loa Phường](obj_loa).";
+    return "Tôi là **Hướng dẫn viên ảo**. Hiện tại bạn chưa thiết lập Gemini API Key (hãy click biểu tượng ⚙️ ở đầu khung chat để dán Key miễn phí từ Google AI Studio).\n\nTuy nhiên, dựa trên tóm tắt chương học, tôi có thể giải đáp các câu hỏi chứa từ khóa như: **Đại hội VI**, **Khoán 10**, **Lạm phát 774%**, thời **Bao Cấp**... Bạn có thể khám phá các hiện vật bằng cách bấm: [Sổ Gạo](obj_sogao), [Sấp tiền lạm phát](obj_saptien), hoặc [Loa Phường](obj_loa).";
   };
 
   // Hàm xử lý gửi tin nhắn
@@ -770,7 +771,7 @@ Tuân thủ các quy tắc sau:
 2. Chỉ in đậm tối đa 3-4 từ khóa lịch sử quan trọng nhất bằng cú pháp **từ_khóa**. Không lạm dụng.
 3. Nếu câu trả lời liên quan đến hiện vật đang trưng bày, thêm liên kết RIÊNG ở dòng CUỐI, KHÔNG nhúng vào giữa câu văn:
 [Sổ Gạo](obj_sogao)
-[Đồng hồ áp suất](obj_bangdien)
+[Đồng hồ áp suất](obj_saptien)
 [Loa Phường](obj_loa)
 4. Nếu câu hỏi nằm ngoài phạm vi lịch sử Việt Nam giai đoạn 1986–nay, hãy lịch sự từ chối.
 

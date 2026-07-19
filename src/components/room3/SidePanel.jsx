@@ -27,6 +27,16 @@ function SidePanel({ selectedObjectId, showUI, isEditMode, roomData, onClose }) 
 
         <div className="panel-divider"></div>
 
+        {detailedContent[selectedObjectId]?.imageUrl && (
+          <div className="panel-image-container" style={{ margin: '0.8rem 0', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <img 
+              src={detailedContent[selectedObjectId].imageUrl} 
+              alt={detailedContent[selectedObjectId].title} 
+              style={{ width: '100%', height: 'auto', display: 'block' }} 
+            />
+          </div>
+        )}
+
         <div className="panel-body">
           {detailedContent[selectedObjectId]?.paragraphs.map((p, idx) => (
             <p key={idx} className="panel-paragraph">{p}</p>

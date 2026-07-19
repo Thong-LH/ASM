@@ -6,7 +6,7 @@ export function useGeminiChat({ contextText, setSelectedObjectId, setChatOpen, w
   const defaultWelcome = welcomeMessage || 'Xin chào! Tôi là hướng dẫn viên tại đây. Giai đoạn 1986–1996 là một trong những chương lịch sử đặc biệt nhất của Việt Nam — từ khủng hoảng kinh tế trầm trọng đến bước ngoặt Đổi Mới. Bạn muốn tìm hiểu điều gì?';
   const defaultArtifactLinks = artifactLinks || [
     { label: 'Sổ Gạo', id: 'obj_sogao' },
-    { label: 'Đồng hồ áp suất', id: 'obj_bangdien' },
+    { label: 'Sấp tiền lạm phát', id: 'obj_saptien' },
     { label: 'Loa Phường', id: 'obj_loa' },
   ];
   const artifactLinksText = defaultArtifactLinks.map(a => `[${a.label}](${a.id})`).join('\n');
@@ -91,7 +91,7 @@ export function useGeminiChat({ contextText, setSelectedObjectId, setChatOpen, w
       return "Theo tài liệu Chương 3: **Khoán 10** được ban hành vào ngày 5/4/1988 (Nghị quyết số 10-NQ/TW của Bộ Chính trị) về đổi mới quản lý kinh tế nông nghiệp. Nội dung cốt lõi là giao quyền **tự chủ sản xuất** cho hộ nông dân và khoán ruộng ổn định trong 15 năm. Nhờ vậy, từ chỗ thiếu đói, đến năm 1989 Việt Nam đã sản xuất đủ ăn và lần đầu tiên xuất khẩu gạo ra thế giới.\n[Sổ Gạo](obj_sogao)";
     }
     if (q.includes('lạm phát') || q.includes('774') || q.includes('phi mã')) {
-      return "Cuối giai đoạn 1975-1986, **lạm phát phi mã** lên đến mức đỉnh điểm 774% vào năm 1986. Tiền mất giá nghiêm trọng, sản xuất đình đốn. Nhờ công cuộc **Đổi mới** sau đó, lạm phát giảm dần: từ 67.1% năm 1991 xuống còn 12.7% năm 1995, giúp đất nước chính thức thoát khỏi khủng hoảng kinh tế - xã hội.\n[Đồng hồ áp suất](obj_bangdien)";
+      return "Cuối giai đoạn 1975-1986, **lạm phát phi mã** lên đến mức đỉnh điểm 774% vào năm 1986. Tiền mất giá nghiêm trọng, sản xuất đình đốn. Nhờ công cuộc **Đổi mới** sau đó, lạm phát giảm dần: từ 67.1% năm 1991 xuống còn 12.7% năm 1995, giúp đất nước chính thức thoát khỏi khủng hoảng kinh tế - xã hội.\n[Sấp tiền lạm phát](obj_saptien)";
     }
     if (q.includes('đại hội 6') || q.includes('đại hội vi') || q.includes('đổi mới') || q.includes('1986')) {
       return "**Đại hội VI** (12/1986) khởi xướng đường lối **Đổi mới toàn diện**, chuyển từ nền kinh tế kế hoạch tập trung bao cấp sang **kinh tế hàng hóa nhiều thành phần**.\n[Loa Phường](obj_loa)";
@@ -113,7 +113,7 @@ export function useGeminiChat({ contextText, setSelectedObjectId, setChatOpen, w
       }
     }
 
-    return "Tôi là **Hướng dẫn viên ảo**. Hiện tại bạn chưa thiết lập Gemini API Key (hãy click biểu tượng ⚙️ ở đầu khung chat để dán Key miễn phí từ Google AI Studio).\n\nBạn có thể hỏi về: **Đại hội VI**, **Khoán 10**, **Lạm phát 774%**, thời **Bao Cấp**...\n[Sổ Gạo](obj_sogao)\n[Đồng hồ áp suất](obj_bangdien)\n[Loa Phường](obj_loa)";
+    return "Tôi là **Hướng dẫn viên ảo**. Hiện tại bạn chưa thiết lập Gemini API Key (hãy click biểu tượng ⚙️ ở đầu khung chat để dán Key miễn phí từ Google AI Studio).\n\nBạn có thể hỏi về: **Đại hội VI**, **Khoán 10**, **Lạm phát 774%**, thời **Bao Cấp**...\n[Sổ Gạo](obj_sogao)\n[Sấp tiền lạm phát](obj_saptien)\n[Loa Phường](obj_loa)";
   };
 
   // Hàm xử lý gửi tin nhắn

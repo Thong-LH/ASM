@@ -1,7 +1,7 @@
 {
   "room_id": "room_3_thanh_tuu",
   "background": {
-    "url": "/assets/background3.png",
+    "url": "/assets/background3.jpeg",
     "z_index": 0
   },
   "interactive_objects": [
@@ -9,13 +9,13 @@
       "id": "obj_cuonglinh",
       "image_url": "/assets/cuonglinh.png",
       "position": [
-        0.0,
-        -0.2,
+        -0.92,
+        -0.57,
         0.5
       ],
       "scale": [
-        1.1,
-        1.1,
+        0.45,
+        0.31,
         1
       ],
       "content": {
@@ -27,13 +27,13 @@
       "id": "obj_bieudo",
       "image_url": "/assets/bieudo.png",
       "position": [
-        -2.5,
-        1.2,
+        0,
+        1,
         0.3
       ],
       "scale": [
-        1.3,
-        1.0,
+        3.02,
+        1.31,
         1
       ],
       "content": {
@@ -43,20 +43,38 @@
     },
     {
       "id": "obj_diacau",
-      "image_url": "/assets/diacau.png",
+      "image_url": "/assets/truc.png",
       "position": [
-        2.8,
-        0.5,
+        0.92,
+        -0.21,
         0.7
       ],
       "scale": [
         0.9,
-        0.9,
+        0.94,
         1
       ],
       "content": {
-        "title": "Phá thế bao vây, Hội nhập Toàn cầu (1995)",
-        "desc": "Năm 1995 là năm bản lề với những thắng lợi ngoại giao lịch sử: Bình thường hóa quan hệ với Trung Quốc, bình thường hóa quan hệ ngoại giao với Hoa Kỳ và chính thức gia nhập ASEAN. Các sự kiện này chấm dứt lệnh cấm vận, mở ra kỷ nguyên đẩy mạnh Công nghiệp hóa - Hiện đại hóa đất nước."
+        "title": "Phá thế bao vây, Hội nhập (1991-1995)",
+        "desc": "Giai đoạn này chứng kiến những thắng lợi ngoại giao lịch sử: Bình thường hóa quan hệ với Trung Quốc (1991), thiết lập quan hệ ngoại giao với Hoa Kỳ và chính thức gia nhập ASEAN vào năm bản lề 1995. Các sự kiện này chấm dứt lệnh cấm vận, mở ra kỷ nguyên hội nhập toàn cầu."
+      }
+    },
+    {
+      "id": "obj_hanhtrinh",
+      "image_url": "/assets/hanhtrinh.png",
+      "position": [
+        0.0,
+        -0.65,
+        0.8
+      ],
+      "scale": [
+        0.6,
+        0.335,
+        1
+      ],
+      "content": {
+        "title": "Hành trình Đổi mới 1986-1996",
+        "desc": "Bản đồ tóm tắt toàn bộ chặng đường lịch sử 10 năm Đổi mới của Việt Nam."
       }
     }
   ]

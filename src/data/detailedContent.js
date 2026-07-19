@@ -3,13 +3,14 @@ const detailedContent = {
   obj_sogao: {
     title: "Cơ chế Quan liêu & Bao cấp",
     subtitle: "Phao cứu sinh thời bao cấp",
+    imageUrl: "/assets/baocap.png",
     paragraphs: [
       "Sau năm 1975, Việt Nam thực hiện mô hình kinh tế kế hoạch hóa tập trung quan liêu bao cấp trên phạm vi cả nước. Quá trình vận hành này đã làm triệt tiêu động lực sản xuất, khiến năng suất lao động thấp kém.",
       "Lương thực, thực phẩm và hàng tiêu dùng thiết yếu thường xuyên khan hiếm. Việc phân phối chủ yếu thông qua chế độ tem phiếu và sổ gạo, khiến đời sống nhân dân vô cùng thiếu thốn, mức sống giảm sút.",
       "Sự bế tắc này đặt ra yêu cầu cấp bách phải đổi mới cơ chế quản lý để thoát khỏi khủng hoảng, dẫn đến bước ngoặt lịch sử tại Đại hội VI (12/1986)."
     ]
   },
-  obj_bangdien: {
+  obj_saptien: {
     title: "Siêu lạm phát 774%",
     subtitle: "Đỉnh điểm khủng hoảng Giá - Lương - Tiền 1986",
     paragraphs: [

@@ -22,16 +22,18 @@ try {
   useTexture.preload('/assets/radio.png');
   useTexture.preload('/assets/nghiquyet10.png');
 
-  useTexture.preload('/assets/background3.png');
+  useTexture.preload('/assets/background3.jpeg');
   useTexture.preload('/assets/cuonglinh.png');
   useTexture.preload('/assets/bieudo.png');
   useTexture.preload('/assets/diacau.png');
+
+  useTexture.preload('/assets/background4.jpeg');
+  useTexture.preload('/assets/roadmap.jpg');
 } catch (e) {
   console.warn('Preload failed:', e);
 }
 
 // Scene Room 2 — camera tự động zoom dựa trên zoomConfig prop
-// zoomConfig: { [objId]: { zoomDist: number, camOffsetX: number } }
 function Scene({
   roomData,
   selectedObjectId,
@@ -47,7 +49,10 @@ function Scene({
   zoomConfig = {},
   entryDirection,
   exitDirection,
-  onExitComplete
+  onExitComplete,
+  roadmapStage = 0,
+  userZoomOffset = 0,
+  userPanOffset = { x: 0, y: 0 }
 }) {
   const { camera } = useThree();
   const lookAtTarget = useRef(new Vector3(0, 0, 0));
@@ -64,16 +69,31 @@ function Scene({
         const [x, y, z] = targetObj.position;
 
         // Lấy config zoom tùy chỉnh nếu có, nếu không dùng mặc định
-        const cfg = zoomConfig[targetObj.id] || { zoomDist: 1.1, camOffsetX: 0.45 };
+        let cfg = zoomConfig[targetObj.id] || { zoomDist: 1.1, camOffsetX: 0.45 };
+
+        // Xử lý GSAP Camera cho 4 chặng Z-Pattern của Roadmap
+        if (targetObj.id === 'obj_roadmap' && roadmapStage > 0) {
+          if (roadmapStage === 1) cfg = { zoomDist: 0.85, camOffsetX: -0.28, camOffsetY: 0.322 };
+          else if (roadmapStage === 2) cfg = { zoomDist: 0.85, camOffsetX: 0.28, camOffsetY: 0.322 };
+          else if (roadmapStage === 3) cfg = { zoomDist: 0.85, camOffsetX: -0.28, camOffsetY: -0.25 };
+          else if (roadmapStage === 4) cfg = { zoomDist: 0.85, camOffsetX: 0.28, camOffsetY: -0.25 };
+        }
 
         const camOffsetY = cfg.camOffsetY !== undefined ? cfg.camOffsetY : 0;
-        const targetCamPos = new Vector3(x + cfg.camOffsetX, y + camOffsetY, z + cfg.zoomDist);
-        const targetLookAt = new Vector3(x + cfg.camOffsetX, y + camOffsetY, z);
+        const finalZoomDist = Math.max(0.25, cfg.zoomDist + userZoomOffset);
+
+        const finalCamX = x + cfg.camOffsetX + userPanOffset.x;
+        const finalCamY = y + camOffsetY + userPanOffset.y;
+
+        const targetCamPos = new Vector3(finalCamX, finalCamY, z + finalZoomDist);
+        const targetLookAt = new Vector3(finalCamX, finalCamY, z);
+
+        const animDuration = (userZoomOffset !== 0 || userPanOffset.x !== 0 || userPanOffset.y !== 0) ? 0.25 : 1.2;
 
         gsap.killTweensOf([camera.position, lookAtTarget.current]);
-        gsap.to(camera.position, { x: targetCamPos.x, y: targetCamPos.y, z: targetCamPos.z, duration: 1.2, ease: 'power2.inOut' });
+        gsap.to(camera.position, { x: targetCamPos.x, y: targetCamPos.y, z: targetCamPos.z, duration: animDuration, ease: 'power2.out' });
         gsap.to(lookAtTarget.current, {
-          x: targetLookAt.x, y: targetLookAt.y, z: targetLookAt.z, duration: 1.2, ease: 'power2.inOut',
+          x: targetLookAt.x, y: targetLookAt.y, z: targetLookAt.z, duration: animDuration, ease: 'power2.out',
           onComplete: () => { setShowUI(true); }
         });
       }
@@ -93,7 +113,7 @@ function Scene({
       gsap.to(camera.position, { x: 0, y: 0, z: 5, duration: 1.2, ease: 'power2.inOut' });
       gsap.to(lookAtTarget.current, { x: 0, y: 0, z: 0, duration: 1.2, ease: 'power2.inOut' });
     }
-  }, [selectedObjectId, chatOpen, roomData, isEditMode, camera, setShowUI]);
+  }, [selectedObjectId, chatOpen, roomData, isEditMode, camera, setShowUI, roadmapStage, zoomConfig, userZoomOffset, userPanOffset]);
 
   return (
     <group>
@@ -133,6 +153,7 @@ function Scene({
         entryDirection={entryDirection}
         exitDirection={exitDirection}
         onExitComplete={onExitComplete}
+        roadmapStage={roadmapStage}
       />
     </group>
   );
