@@ -8,30 +8,47 @@ import InteractivePlane from '../room1/InteractivePlane';
 import Mascot from '../room1/Mascot';
 import { useTexture } from '@react-three/drei';
 
-// Preload all assets to make room transitions completely seamless and instant
-try {
-  useTexture.preload('/assets/bg_maudich_final.jpg');
-  useTexture.preload('/assets/sogao.png');
-  useTexture.preload('/assets/dongho.png');
-  useTexture.preload('/assets/loa.png');
+// ═══════════════════════════════════════════════════════════════════════════════
+// PRELOAD TẤT CẢ TEXTURE CỦA MỌI PHÒNG + MASCOT — Tải ngầm vào GPU cache ngay
+// khi app khởi động, loại bỏ hoàn toàn spinner "Đang tải bảo tàng..." khi chuyển phòng.
+// Mỗi lệnh preload độc lập, 1 cái fail không ảnh hưởng cái khác.
+// ═══════════════════════════════════════════════════════════════════════════════
 
-  useTexture.preload('/assets/background2.png');
-  useTexture.preload('/assets/vankien.png');
-  useTexture.preload('/assets/tobao.png');
-  useTexture.preload('/assets/sodo.png');
-  useTexture.preload('/assets/radio.png');
-  useTexture.preload('/assets/nghiquyet10.png');
+// --- Room 1: Thời Bao Cấp ---
+useTexture.preload('/assets/background1.png');
+useTexture.preload('/assets/sogao.png');
+useTexture.preload('/assets/saptien.png');
+useTexture.preload('/assets/loa.png');
 
-  useTexture.preload('/assets/background3.jpeg');
-  useTexture.preload('/assets/cuonglinh.png');
-  useTexture.preload('/assets/bieudo.png');
-  useTexture.preload('/assets/diacau.png');
+// --- Room 2: Đại hội VI & Đổi mới ---
+useTexture.preload('/assets/background2.png');
+useTexture.preload('/assets/vankien.png');
+useTexture.preload('/assets/tobao.png');
+useTexture.preload('/assets/sodo.png');
+useTexture.preload('/assets/radio.png');
+useTexture.preload('/assets/nghiquyet10.png');
+useTexture.preload('/assets/tv.png');
 
-  useTexture.preload('/assets/background4.jpeg');
-  useTexture.preload('/assets/roadmap.jpg');
-} catch (e) {
-  console.warn('Preload failed:', e);
-}
+// --- Room 3: Thành tựu 1991–1995 ---
+useTexture.preload('/assets/background3.jpeg');
+useTexture.preload('/assets/cuonglinh.png');
+useTexture.preload('/assets/bieudo.png');
+useTexture.preload('/assets/truc.png');
+useTexture.preload('/assets/diacau.png');
+useTexture.preload('/assets/hanhtrinh.png');
+
+// --- Room 4: Lộ trình Đổi Mới ---
+useTexture.preload('/assets/background4.jpeg');
+useTexture.preload('/assets/roadmap.jpg');
+
+// --- Mascot Sprite Sheets ---
+useTexture.preload('/assets/mascot_idle.png');
+useTexture.preload('/assets/mascot_welcome.png');
+useTexture.preload('/assets/mascot_thinking.png');
+useTexture.preload('/assets/mascot_pointing.png');
+
+// --- Globe texture ---
+useTexture.preload('/assets/earth_map_texture.jpeg');
 
 // Scene Room 2 — camera tự động zoom dựa trên zoomConfig prop
 function Scene({
