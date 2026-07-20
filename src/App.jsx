@@ -273,11 +273,6 @@ export default function App() {
     setCurrentRoom(exitingToRoom);
     setExitingToRoom(null);
     setMascotState('welcome');
-    
-    // Xóa prevRoom sau 2s (khi mascot đã bay vào xong) để entryDirection không bị stale
-    setTimeout(() => {
-      setPrevRoom(null);
-    }, 2000);
   };
 
   // Khởi tạo Gemini Chat Hook
