@@ -1,4 +1,4 @@
-// Nội dung thuyết minh chi tiết cho từng hiện vật - Phòng 2: Đại hội VI
+// Nội dung thuyết minh chi tiết cho từng hiện vật - Phòng 2: Đại hội VI & Đổi mới
 const detailedContent_room2 = {
   obj_vankien: {
     title: "Tinh thần \"Nhìn thẳng vào sự thật\"",
@@ -21,6 +21,18 @@ const detailedContent_room2 = {
   obj_sodo: {
     title: "Ba Chương trình Kinh tế lớn",
     subtitle: "Mũi nhọn chiến lược thoát khỏi khủng hoảng",
+    images: [
+      {
+        paragraphIndex: 1,
+        url: "/assets/tieudung_xuatkhau.webp",
+        note: "Khung cảnh thu hoạch rộn ràng tạo nên bước ngoặt đưa Việt Nam thành nước xuất khẩu gạo lớn thứ 3 thế giới. Nguồn: Báo Tuổi Trẻ"
+      },
+      {
+        paragraphIndex: 1,
+        url: "/assets/xuatkhau.webp",
+        note: "Sự bứt phá của ngành xuất khẩu gạo Việt Nam từ năm 1989 nhờ ba chương trình kinh tế lớn. Nguồn: Hiệp hội Lương thực Việt Nam"
+      }
+    ],
     paragraphs: [
       "Cùng với đổi mới tư duy, các chính sách xã hội cũng được điều chỉnh với phương châm lấy con người làm mục tiêu và động lực phát triển.",
       "Trọng tâm của giai đoạn này là việc dồn toàn lực để thực hiện thành công ba chương trình kinh tế: Lương thực - thực phẩm, Hàng tiêu dùng và Hàng xuất khẩu.",
@@ -30,6 +42,18 @@ const detailedContent_room2 = {
   obj_radio: {
     title: "Đối ngoại mở cửa",
     subtitle: "\"Việt Nam muốn là bạn với tất cả các nước\"",
+    images: [
+      {
+        paragraphIndex: 1,
+        url: "/assets/doingoai1.webp",
+        note: "Lễ rút quân tình nguyện Việt Nam tại Campuchia năm 1989 — bước đi chiến lược mở đường cho hội nhập. Nguồn: Chip HIRES / Gamma-Rapho via Getty Images"
+      },
+      {
+        paragraphIndex: 2,
+        url: "/assets/doingoai2.webp",
+        note: "Việc ban hành Luật Đầu tư nước ngoài năm 1987 đặt nền móng pháp lý cho dòng vốn FDI vào Việt Nam. Nguồn: Petrovietnam - PetroTimes"
+      }
+    ],
     paragraphs: [
       "Để phá vỡ thế bao vây và cô lập về kinh tế, Việt Nam đã chủ động thay đổi chiến lược ngoại giao, chuyển dịch từ đối đầu sang đối thoại với thế giới.",
       "Với tinh thần \"Việt Nam muốn là bạn với tất cả các nước\", nhà nước từng bước rút quân khỏi Campuchia và nỗ lực bình thường hóa quan hệ quốc tế.",

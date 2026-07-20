@@ -55,7 +55,7 @@ export default function AiAppendixModal({ onClose }) {
             <h2 className="block-title">
               <Layers className="block-icon" size={24} /> 2. Quy trình làm việc & Phân định nội dung
             </h2>
-            
+
             <div className="workflow-container">
               {/* AI Output */}
               <div className="workflow-box ai-box">
@@ -116,7 +116,7 @@ export default function AiAppendixModal({ onClose }) {
                 Toàn bộ kiến thức lịch sử (Đại hội VI, Khoán 10, Đổi mới) được kiểm chứng dựa trên:
               </p>
               <ul className="sources-bullet-list">
-                <li>Giáo trình <em>Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin</em></li>
+                <li>Giáo trình <em>LỊCH SỬ ĐẢNG CỘNG SẢN VIỆT NAM - SỬ DỤNG TRONG CÁC TRƯỜNG ĐẠI HỌC- HỆ KHÔNG CHUYÊN LÝ LUẬN CHÍNH TRỊ</em></li>
                 <li>Văn kiện Đại hội đại biểu toàn quốc lần thứ VI, VII.</li>
               </ul>
             </div>

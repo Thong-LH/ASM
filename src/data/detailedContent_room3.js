@@ -3,6 +3,18 @@ const detailedContent_room3 = {
   obj_cuonglinh: {
     title: "Định hình Cương lĩnh 1991",
     subtitle: "Cột mốc định hướng phát triển đất nước",
+    images: [
+      {
+        paragraphIndex: 0,
+        url: "/assets/VII.webp",
+        note: "Đại hội VII (1991) — Nơi thông qua Cương lĩnh lịch sử giúp Việt Nam đứng vững trước giông bão thời đại. Nguồn: Cà Mau"
+      },
+      {
+        paragraphIndex: 2,
+        url: "/assets/VII2.webp",
+        note: "Diện mạo nền kinh tế hàng hóa nhiều thành phần có sự quản lý của Nhà nước sau Cương lĩnh 1991. Nguồn: NHÀ XUẤT BẢN CHÍNH TRỊ QUỐC GIA SỰ THẬT"
+      }
+    ],
     paragraphs: [
       "Giữa lúc hệ thống xã hội chủ nghĩa ở Liên Xô và Đông Âu sụp đổ, Đại hội VII (1991) của Đảng đã thông qua Cương lĩnh xây dựng đất nước trong thời kỳ quá độ lên chủ nghĩa xã hội.",
       "Cương lĩnh đã định hình rõ mô hình xã hội xã hội chủ nghĩa mà nhân dân ta xây dựng với 6 đặc trưng cơ bản.",
@@ -12,6 +24,13 @@ const detailedContent_room3 = {
   obj_bieudo: {
     title: "Thoát khỏi Khủng hoảng Kinh tế",
     subtitle: "Thành tựu tăng trưởng vượt trội 1991 - 1995",
+    images: [
+      {
+        paragraphIndex: 1,
+        url: "/assets/GDP.webp",
+        note: "Biểu đồ trực quan minh họa tốc độ tăng trưởng GDP vượt bậc của Việt Nam giai đoạn 1991 - 1995. Nguồn: Infographics.vn"
+      }
+    ],
     paragraphs: [
       "Kết quả thực hiện kế hoạch 5 năm (1991 - 1995) đánh dấu một bước phát triển vượt bậc của nền kinh tế Việt Nam. Tốc độ tăng trưởng GDP bình quân đạt tới 8.2% mỗi năm.",
       "Đặc biệt, lạm phát phi mã từng đạt đỉnh 774% năm 1986, đến năm 1991 còn 67.1%, và đến năm 1995 đã được kiểm soát hiệu quả, giảm sâu xuống chỉ còn 12.7%.",
@@ -21,6 +40,18 @@ const detailedContent_room3 = {
   obj_diacau: {
     title: "Hội nhập Toàn cầu (1995)",
     subtitle: "Phá vỡ thế bao vây cô lập ngoại giao",
+    images: [
+      {
+        paragraphIndex: 0,
+        url: "/assets/ASEAN2.webp",
+        note: "Cột mốc bình thường hóa quan hệ Việt - Mỹ năm 1995 xóa bỏ hoàn toàn thế cấm vận kinh tế. Nguồn: VOV.VN"
+      },
+      {
+        paragraphIndex: 0,
+        url: "/assets/ASEAN.webp",
+        note: "Lễ kết nạp Việt Nam trở thành thành viên chính thức thứ 7 của ASEAN (28/7/1995). Nguồn: Báo Quân đội nhân dân"
+      }
+    ],
     paragraphs: [
       "Năm 1995 đi vào lịch sử ngoại giao Việt Nam như một năm bản lề với những thắng lợi vang dội: bình thường hóa quan hệ với Trung Quốc, bình thường hóa quan hệ ngoại giao với Hoa Kỳ, và gia nhập ASEAN.",
       "Những sự kiện này đã chính thức chấm dứt thời kỳ bị bao vây, cấm vận kinh tế kéo dài nhiều thập kỷ, mở ra không gian hội nhập quốc tế rộng lớn.",
