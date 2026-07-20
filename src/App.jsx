@@ -27,6 +27,7 @@ import ChatBox from './components/room1/ChatBox';
 import EditModeToolbar from './components/room1/EditModeToolbar';
 import Intro from './components/Intro';
 import QuizGame from './components/quiz/QuizGame';
+import AiAppendixModal from './components/AiAppendixModal';
 
 const ROOM_TOURS = {
   room1: [
@@ -165,6 +166,7 @@ export default function App() {
   const [mascotState, setMascotState] = useState('idle');
   const [contextText, setContextText] = useState('');
   const [quizOpen, setQuizOpen] = useState(false);
+  const [aiAppendixOpen, setAiAppendixOpen] = useState(false);
 
 
   const [userZoomOffset, setUserZoomOffset] = useState(0); // Độ lệch Zoom tự do do người dùng cuộn chuột hoặc bấm nút Zoom
@@ -442,7 +444,7 @@ export default function App() {
           <button className="nav-btn" onClick={() => { setDropdownOpen(false); setQuizOpen(true); }}>
             Trò Chơi
           </button>
-          <button className="nav-btn" onClick={() => setModalContent({ title: "Phụ Lục AI & Hướng Dẫn Viên Ảo", desc: "Hệ thống AI hướng dẫn viên đang được phát triển." })}>
+          <button className="nav-btn" onClick={() => { setDropdownOpen(false); setAiAppendixOpen(true); }}>
             Phụ Lục AI
           </button>
           <button className="nav-btn tour-start-btn" onClick={startTour} style={{ background: 'rgba(0, 255, 204, 0.15)', color: '#00ffcc', borderColor: '#00ffcc' }}>
@@ -869,6 +871,7 @@ export default function App() {
       )}
 
       {quizOpen && <QuizGame onClose={() => setQuizOpen(false)} />}
+      {aiAppendixOpen && <AiAppendixModal onClose={() => setAiAppendixOpen(false)} />}
 
       {/* Màn hình Intro mở đầu (Che phủ Canvas chạy ngầm bên dưới) */}
       {!isEntered && (
