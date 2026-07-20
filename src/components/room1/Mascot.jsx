@@ -156,9 +156,7 @@ function Mascot({
       }
     }
 
-    let delay = 0;
     if (!hasEnteredRef.current && entryDirection) {
-      delay = 0.5;
       hasEnteredRef.current = true;
     }
 
@@ -194,8 +192,7 @@ function Mascot({
         x: targetX,
         y: targetY,
         z: targetZ,
-        duration: 1.4,
-        delay: delay,
+        duration: 1.2,
         ease: 'power2.out',
         onComplete: () => {
           isTransitioningRef.current = false;
@@ -206,8 +203,7 @@ function Mascot({
 
       gsap.to(spriteRef.current.rotation, {
         z: 0,
-        duration: 1.4,
-        delay: delay,
+        duration: 1.2,
         ease: 'power2.out'
       });
     } else {

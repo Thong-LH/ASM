@@ -250,6 +250,7 @@ export default function App() {
   // Tính toán hướng bay đổi phòng
   const getTransitionDirection = (from, to) => {
     const orders = { room1: 1, room2: 2, room3: 3, room4: 4 };
+    if (!from && to) return 'forward'; // Vào phòng đầu tiên từ Intro -> bay vào 'forward'
     if (!from || !to) return null;
     return orders[to] > orders[from] ? 'forward' : 'backward';
   };
