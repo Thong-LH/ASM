@@ -164,12 +164,6 @@ export default function App() {
   const [mascotState, setMascotState] = useState('idle');
   const [contextText, setContextText] = useState('');
 
-  // Reset mascot về trạng thái idle khi đóng chatbox
-  useEffect(() => {
-    if (!chatOpen) {
-      setMascotState('idle');
-    }
-  }, [chatOpen]);
 
   const [userZoomOffset, setUserZoomOffset] = useState(0); // Độ lệch Zoom tự do do người dùng cuộn chuột hoặc bấm nút Zoom
   const [userPanOffset, setUserPanOffset] = useState({ x: 0, y: 0 }); // Độ lệch Kéo thả chuột (Mouse Drag Pan)
@@ -657,7 +651,10 @@ export default function App() {
       {/* Chatbox AI */}
       <ChatBox
         chatOpen={chatOpen}
-        setChatOpen={setChatOpen}
+        setChatOpen={(open) => {
+          setChatOpen(open);
+          if (!open) setMascotState('idle');
+        }}
         setSelectedObjectId={setSelectedObjectId}
         {...chatHook}
       />
