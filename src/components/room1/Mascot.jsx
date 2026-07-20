@@ -33,7 +33,7 @@ function Mascot({
 
   // State quản lý Hướng nhìn ('RIGHT' | 'LEFT') và Trạng thái hoạt ảnh ('idle' | 'pointing' | 'thinking' | 'welcome')
   const [lookDirection, setLookDirection] = useState('LEFT');
-  const [actionState, setActionState] = useState(mascotState);
+  const [actionState, setActionState] = useState(entryDirection ? 'idle' : mascotState);
   const isTransitioningRef = useRef(false);
   const hasEnteredRef = useRef(false);
 
@@ -88,7 +88,7 @@ function Mascot({
 
   // Đồng bộ trạng thái đứng yên khi không di chuyển
   useEffect(() => {
-    if (isTransitioningRef.current) return;
+    if (isTransitioningRef.current || (!hasEnteredRef.current && entryDirection)) return;
     if (mascotState === 'welcome') {
       setActionState('welcome');
     } else if (mascotState === 'thinking') {

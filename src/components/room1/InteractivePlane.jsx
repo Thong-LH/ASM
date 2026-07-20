@@ -589,9 +589,9 @@ function InteractivePlane({
                   float greenness = texColor.g - max(texColor.r, texColor.b);
                   if (greenness > 0.12 && texColor.g > 0.15) {
                     // Trộn uTime với tọa độ UV để thay đổi hạt nhiễu liên tục theo khung hình
-                    float n = random(vUv * 600.0 + vec2(sin(uTime * 8.0), cos(uTime * 5.0)));
-                    // Hạt cát nhiễu xám đặc trưng của TV cổ
-                    vec3 noiseColor = vec3(0.06 + n * 0.12);
+                    float n = random(vUv * 600.0 + vec2(sin(uTime * 15.0), cos(uTime * 10.0)));
+                    // Tăng độ sáng (từ 0.25 đến 0.65) giúp hạt cát nhiễu nổi bật và rõ nét hơn
+                    vec3 noiseColor = vec3(0.25 + n * 0.4);
                     gl_FragColor = vec4(noiseColor, texColor.a);
                   } else {
                     gl_FragColor = texColor;
