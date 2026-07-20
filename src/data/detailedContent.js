@@ -26,11 +26,6 @@ const detailedContent = {
         paragraphIndex: 1,
         url: "/assets/774chart.png",
         note: "Biểu đồ trực quan diễn biến lạm phát đỉnh điểm năm 1986"
-      },
-      {
-        paragraphIndex: 2,
-        url: "/assets/khunghoan.webp",
-        note: "Bối cảnh công cuộc Cải tổ tại Liên Xô đặt ra bài học thực tiễn lớn cho Việt Nam trước 1986. Nguồn: VOV"
       }
     ],
     paragraphs: [
@@ -44,9 +39,9 @@ const detailedContent = {
     subtitle: "Luồng gió thời đại và khát vọng chuyển mình",
     images: [
       {
-        paragraphIndex: 1,
-        url: "/assets/dot pha.webp",
-        note: "Cơ chế mua bán tem phiếu thắt lưng buộc bụng được các địa phương như Long An thí điểm xóa bỏ. Nguồn: Wikipedia"
+        paragraphIndex: 2,
+        url: "/assets/khunghoan.webp",
+        note: "Bối cảnh công cuộc Cải tổ tại Liên Xô đặt ra bài học thực tiễn lớn cho Việt Nam trước 1986. Nguồn: VOV"
       }
     ],
     paragraphs: [
