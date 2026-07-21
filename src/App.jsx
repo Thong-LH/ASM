@@ -67,9 +67,9 @@ const ROOMS_CONFIG = {
     ],
     welcomeMessage: 'Xin chào! Tôi là hướng dẫn viên tại đây. Giai đoạn 1975–1986 là thời kỳ Bao Cấp — từ cuộc khủng hoảng kinh tế trầm trọng đến những sức ép cải cách trước Đổi Mới. Bạn muốn tìm hiểu điều gì?',
     zoomConfig: {
-      obj_sogao: { zoomDist: 1.25, camOffsetX: 0.65 },
+      obj_sogao: { zoomDist: 1.3, camOffsetX: 0.6 },
       obj_loa: { zoomDist: 1.35, camOffsetX: -0.6 },
-      obj_saptien: { zoomDist: 0.45, camOffsetX: 0.25 },
+      obj_saptien: { zoomDist: 0.6, camOffsetX: 0.25 },
     }
   },
   room2: {
@@ -88,10 +88,10 @@ const ROOMS_CONFIG = {
     welcomeMessage: 'Xin chào! Tôi là hướng dẫn viên tại đây. Phòng này tái hiện giai đoạn bước ngoặt của Đại hội VI (1986) và các chính sách Đổi Mới đầu tiên. Bạn muốn tìm hiểu điều gì?',
     zoomConfig: {
       obj_vankien: { zoomDist: 1.1, camOffsetX: 0.6 },
-      obj_tobao: { zoomDist: 1.15, camOffsetX: 0.65 },
-      obj_sodo: { zoomDist: 2, camOffsetX: 1.25 },
-      obj_radio: { zoomDist: 1.1, camOffsetX: -0.55 },
-      obj_nghiquyet10: { zoomDist: 0.95, camOffsetX: 0.55 },
+      obj_tobao: { zoomDist: 1.5, camOffsetX: 0.65 },
+      obj_sodo: { zoomDist: 2.5, camOffsetX: 1 },
+      obj_radio: { zoomDist: 1.1, camOffsetX: -0.5 },
+      obj_nghiquyet10: { zoomDist: 1.1, camOffsetX: 0.5 },
       obj_tv: { zoomDist: 0.52, camOffsetX: 0, camOffsetY: 0.04 },
     }
   },
@@ -109,7 +109,7 @@ const ROOMS_CONFIG = {
     welcomeMessage: 'Xin chào! Tôi là hướng dẫn viên tại đây. Phòng này tái hiện các Thành tựu Đổi Mới xuất sắc giai đoạn 1991–1995, giúp đất nước thoát khỏi khủng hoảng kinh tế và bắt đầu hội nhập thế giới. Bạn muốn tìm hiểu điều gì?',
     zoomConfig: {
       obj_cuonglinh: { zoomDist: 1.1, camOffsetX: 0.5 },
-      obj_bieudo: { zoomDist: 2, camOffsetX: 1.2 },
+      obj_bieudo: { zoomDist: 2.5, camOffsetX: 1.1 },
       obj_diacau: { zoomDist: 1.35, camOffsetX: -0.5, camOffsetY: 0.0 },
       obj_hanhtrinh: { zoomDist: 1, camOffsetX: 0.0, camOffsetY: 0.42 },
     }
@@ -258,10 +258,10 @@ export default function App() {
 
   const handleRoomSwitch = (targetRoom) => {
     if (targetRoom === currentRoom) return;
-    
+
     // Tải trước tài nguyên của phòng đích ngay khi mascot bắt đầu bay
     preloadRoomAssets(targetRoom);
-    
+
     setDropdownOpen(false);
     setSelectedObjectId(null); // Đóng hiện vật cũ
     setRoadmapStage(0);
