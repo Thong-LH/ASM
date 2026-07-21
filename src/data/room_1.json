@@ -27,7 +27,7 @@
       "id": "obj_saptien",
       "image_url": "/assets/saptien.png",
       "position": [
-        -0.77,
+        -0.54,
         0.42,
         0.5
       ],
@@ -45,7 +45,7 @@
       "id": "obj_loa",
       "image_url": "/assets/loa.png",
       "position": [
-        3.92,
+        3.24,
         1.28,
         0.5
       ],
